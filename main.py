@@ -20,7 +20,6 @@ clock = pygame.time.Clock()
 running = True
 
 a = np.random.randint(0,2, (100,100))
-print(type(a))
 
 while running:
     for event in pygame.event.get():
