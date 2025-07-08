@@ -68,6 +68,6 @@ while running:
     render_fps_counter(screen,fps_counter_color,fps_counter_font,clock.get_fps())
     pygame.display.flip()
 
-    
+    grid = calculate_next_state(grid)
 
     clock.tick(FPS)
