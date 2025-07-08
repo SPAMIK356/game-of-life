@@ -4,7 +4,7 @@ from pygame.font import Font
 from numpy.typing import NDArray
 
 def draw_grid(grid: NDArray, sim_surface: pygame.surface, width, height) -> pygame.Surface:
-    pygame.surfarray.blit_array(sim_surface,np.transpose(grid))
+    pygame.surfarray.blit_array(sim_surface,grid)
     scaled_surface = pygame.transform.scale(sim_surface, (width, height))
     return scaled_surface
 
@@ -63,7 +63,7 @@ while running:
 
     colors = cell_colors[grid]
 
-    pygame.Surface.blit(screen,draw_grid(np.transpose(colors),sim_surface,WIDTH,HEIGHT), (0,0))
+    pygame.Surface.blit(screen,draw_grid(colors,sim_surface,WIDTH,HEIGHT), (0,0))
     render_fps_counter(screen,fps_counter_color,fps_counter_font,clock.get_fps())
     pygame.display.flip()
 
