@@ -30,7 +30,7 @@ clock = pygame.time.Clock()
 running = True
 
 
-grid = np.random.randint(0,2, (1000,1000))
+grid = np.random.randint(0,2, (100,100))
 sim_surface = pygame.Surface(grid.shape)
 while running:
     for event in pygame.event.get():
@@ -58,5 +58,4 @@ while running:
     buffer[(neigbours == 3) & empty] = 1
 
     grid = buffer
-    
     clock.tick(FPS)
