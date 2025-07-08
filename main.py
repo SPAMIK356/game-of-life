@@ -1,6 +1,5 @@
 import numpy as np
 import pygame
-from pygame import Rect
 
 def draw_grid(grid: np.ndarray, sim_surface: pygame.surface, width, height) -> pygame.Surface:
     pygame.surfarray.blit_array(sim_surface,np.transpose(grid))
