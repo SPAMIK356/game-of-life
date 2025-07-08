@@ -22,10 +22,10 @@ def get_neighbours(grid: np.array) -> np.array:
     return neigbours
             
 
-FPS = 1
+FPS = 10
 WIDTH = 1280
 HEIGHT = 720
-CELL_SIZE = 50.0
+CELL_SIZE = 5
 cell_colors = np.array([(250,0,0),(0,250,0)])
 
 #Pygame setup
@@ -34,7 +34,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 running = True
 
-grid = np.random.randint(0,2, (3,3))
+grid = np.random.randint(0,2, (100,100))
 
 while running:
     for event in pygame.event.get():
@@ -54,9 +54,13 @@ while running:
     empty = grid == 0
     taken = grid == 1
     
-    grid[(neigbours<2) & taken] = 0
-    grid[(neigbours > 3) & taken] = 0
-    grid[np.logical_or(neigbours == 2, neigbours == 3) &  taken] = 1
-    grid[(neigbours == 3) & empty] = 1
+    buffer = grid.copy()
+
+    buffer[(neigbours<2) & taken] = 0
+    buffer[(neigbours > 3) & taken] = 0
+    buffer[np.logical_or(neigbours == 2, neigbours == 3) &  taken] = 1
+    buffer[(neigbours == 3) & empty] = 1
+
+    grid = buffer
 
     clock.tick(FPS)
