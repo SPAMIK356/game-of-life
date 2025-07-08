@@ -34,7 +34,6 @@ def calculate_next_state(grid: NDArray) -> NDArray:
 
     buffer[(neigbours<2) & taken] = 0
     buffer[(neigbours > 3) & taken] = 0
-    buffer[np.logical_or(neigbours == 2, neigbours == 3) &  taken] = 1
     buffer[(neigbours == 3) & empty] = 1
     return(buffer)
 
@@ -53,7 +52,7 @@ running = True
 fps_counter_font = pygame.font.SysFont("Arial",32)
 fps_counter_color = (255,0,0)
 
-grid = np.random.randint(0,2, (100,100))
+grid = np.random.randint(0,2, (1000,1000))
 sim_surface = pygame.Surface(grid.shape)
 while running:
     for event in pygame.event.get():
