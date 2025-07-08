@@ -43,7 +43,7 @@ while running:
     screen.fill('white')
 
     colors = cell_colors[grid]
-    print(colors.shape)
+
     draw_grid(np.transpose(grid),CELL_SIZE,colors,screen)
 
     pygame.display.flip()
