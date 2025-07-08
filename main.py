@@ -6,8 +6,8 @@ def draw_grid(grid: np.ndarray, cell_size: float, colors: np.ndarray, surface: p
     x_max = grid.shape[0]
     y_max = grid.shape[1]
 
-    for y in range(y_max):
-        for x in range(x_max):
+    for x in range(x_max):
+        for y in range(y_max):
             pygame.draw.rect(surface,colors[x,y], Rect(x*cell_size,y*cell_size, cell_size,cell_size)) 
 
 
@@ -22,19 +22,18 @@ def get_neighbours(grid: np.array) -> np.array:
     return neigbours
             
 
-FPS = 10
+FPS = 60
 WIDTH = 1280
 HEIGHT = 720
-CELL_SIZE = 5
+CELL_SIZE = 100.0
 cell_colors = np.array([(250,0,0),(0,250,0)])
 
-#Pygame setup
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 running = True
 
-grid = np.random.randint(0,2, (100,100))
+grid = np.random.randint(0,2, (3,3))
 
 while running:
     for event in pygame.event.get():
@@ -44,8 +43,8 @@ while running:
     screen.fill('white')
 
     colors = cell_colors[grid]
-
-    draw_grid(grid,CELL_SIZE,colors,screen)
+    print(colors.shape)
+    draw_grid(np.transpose(grid),CELL_SIZE,colors,screen)
 
     pygame.display.flip()
 
@@ -62,5 +61,5 @@ while running:
     buffer[(neigbours == 3) & empty] = 1
 
     grid = buffer
-
+    
     clock.tick(FPS)
