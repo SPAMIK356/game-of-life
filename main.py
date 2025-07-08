@@ -25,7 +25,18 @@ def get_neighbours(grid: NDArray) -> NDArray:
     return neigbours
 
 def calculate_next_state(grid: NDArray) -> NDArray:
-    ...
+    neigbours = get_neighbours(grid)
+
+    empty = grid == 0
+    taken = grid == 1
+    
+    buffer = grid.copy()
+
+    buffer[(neigbours<2) & taken] = 0
+    buffer[(neigbours > 3) & taken] = 0
+    buffer[np.logical_or(neigbours == 2, neigbours == 3) &  taken] = 1
+    buffer[(neigbours == 3) & empty] = 1
+    return(buffer)
 
 
 FPS = 60
