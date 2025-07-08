@@ -9,8 +9,8 @@ def draw_grid(grid: np.ndarray, sim_surface: pygame.surface, width, height) -> p
 
 def render_fps_counter(screen: pygame.surface, color: tuple, font:Font, fps:float) -> None:
 
-    counter = font.render(str(fps),False, color)
-    
+    counter = font.render(str(int(fps)),False, color)
+    screen.blit(counter,(0,0))
     
 
 def get_neighbours(grid: np.array) -> np.array:
