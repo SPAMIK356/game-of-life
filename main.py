@@ -11,6 +11,17 @@ def draw_grid(grid: np.ndarray, cell_size: float, colors: np.ndarray, surface: p
             pygame.draw.rect(surface,colors[x,y], Rect(x*cell_size,y*cell_size, cell_size,cell_size)) 
 
 
+def get_neighbours(grid: np.array) -> np.array:
+    neigbours = np.zeros(shape=grid.shape)
+    transformations = np.array([-1,0,1])
+    for x in transformations:
+        for y in transformations:
+            if x == 0 and y == 0:
+                continue
+            neigbours += np.roll(grid, (x,y),(0,1))
+    return neigbours
+            
+
 FPS = 60
 WIDTH = 1280
 HEIGHT = 720
