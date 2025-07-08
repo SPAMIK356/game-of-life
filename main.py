@@ -1,8 +1,9 @@
 import numpy as np
 import pygame
 from pygame.font import Font
+from numpy.typing import NDArray
 
-def draw_grid(grid: np.ndarray, sim_surface: pygame.surface, width, height) -> pygame.Surface:
+def draw_grid(grid: NDArray, sim_surface: pygame.surface, width, height) -> pygame.Surface:
     pygame.surfarray.blit_array(sim_surface,np.transpose(grid))
     scaled_surface = pygame.transform.scale(sim_surface, (width, height))
     return scaled_surface
@@ -13,7 +14,7 @@ def render_fps_counter(screen: pygame.surface, color: tuple, font:Font, fps:floa
     screen.blit(counter,(0,0))
     
 
-def get_neighbours(grid: np.array) -> np.array:
+def get_neighbours(grid: NDArray) -> NDArray:
     neigbours = np.zeros(shape=grid.shape)
     
     for x in range(-1,2):
@@ -23,8 +24,9 @@ def get_neighbours(grid: np.array) -> np.array:
             neigbours += np.roll(grid, (x,y),(0,1))
     return neigbours
 
-def calculate_next_state(grid: np.array):
+def calculate_next_state(grid: NDArray) -> NDArray:
     ...
+
 
 FPS = 60
 WIDTH = 800
@@ -54,20 +56,6 @@ while running:
     pygame.Surface.blit(screen,draw_grid(np.transpose(colors),sim_surface,WIDTH,HEIGHT), (0,0))
     render_fps_counter(screen,fps_counter_color,fps_counter_font,clock.get_fps())
     pygame.display.flip()
-
-    neigbours = get_neighbours(grid)
-
-    empty = grid == 0
-    taken = grid == 1
-    
-    buffer = grid.copy()
-
-    buffer[(neigbours<2) & taken] = 0
-    buffer[(neigbours > 3) & taken] = 0
-    buffer[np.logical_or(neigbours == 2, neigbours == 3) &  taken] = 1
-    buffer[(neigbours == 3) & empty] = 1
-
-    grid = buffer
 
     
 
