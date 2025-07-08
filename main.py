@@ -22,7 +22,9 @@ def get_neighbours(grid: np.array) -> np.array:
                 continue
             neigbours += np.roll(grid, (x,y),(0,1))
     return neigbours
-            
+
+def calculate_next_state(grid: np.array):
+    ...
 
 FPS = 60
 WIDTH = 800
