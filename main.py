@@ -15,18 +15,13 @@ FPS = 60
 WIDTH = 1280
 HEIGHT = 720
 CELL_SIZE = 5.0
-C_EMPTY = (100,100,100)
-C_TAKEN = (0,0,0)
+cell_colors = np.array([(200,200,200),(0,0,0)])
 
 #Pygame setup
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 running = True
-
-a = np.random.randint(0,2, (100,100))
-colors = np.full((100,100,3),C_EMPTY)
-colors[a==1] = C_TAKEN
 
 
 while running:
@@ -35,6 +30,10 @@ while running:
             running = False
 
     screen.fill('white')
+
+    a = np.random.randint(0,2, (100,100))
+    colors = cell_colors[a]
     draw_grid(a,CELL_SIZE,colors,screen)
+
     pygame.display.flip()
     clock.tick(FPS)
